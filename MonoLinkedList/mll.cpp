@@ -8,7 +8,8 @@ MonoLinkedList<B>::MonoLinkedList()
 template <typename B>
 MonoLinkedList<B>::MonoLinkedList( B const b )
 {
-    top->unit = b;
+    top         = new ListElement();
+    top->unit   = b;
 }
 template <typename B>
 MonoLinkedList<B>::MonoLinkedList( MonoLinkedList const &monoLinkedList )
@@ -67,7 +68,7 @@ template <typename B>
 void MonoLinkedList<B>::insertFirst( B const b )
 {
     ListElement *tmpElement = new ListElement();
-    tmpElement->unit        = b.unit;
+    tmpElement->unit        = b;
     if( nullptr == top )
     {
         top = tmpElement;
@@ -90,7 +91,7 @@ const bool MonoLinkedList<B>::insertAtPos( B const b, int const pos )
     if( ( 1 == pos ) )
     {
         insertFirst( b );
-        return;
+        return true;
     }
     ListElement *tmpElement = top;
     for( int i = pos ; i > 2 ; --i )
@@ -104,7 +105,7 @@ const bool MonoLinkedList<B>::insertAtPos( B const b, int const pos )
     if( nullptr == tmpElement->nextElement )
     {
         tmpElement->nextElement = tmpElement2;
-        return;
+        return true;
     }
     tmpElement2->nextElement    = tmpElement->nextElement;
     tmpElement->nextElement     = tmpElement2;
@@ -171,7 +172,7 @@ const bool MonoLinkedList<B>::deleteAtPos( int const pos )
     if( ( 1 == pos ) )
     {
         deleteFirst();
-        return;
+        return true;
     }
     ListElement *tmpElement = top;
     for( int i = pos ; i > 2 ; --i )
@@ -184,7 +185,7 @@ const bool MonoLinkedList<B>::deleteAtPos( int const pos )
     {
         delete tmpElement;
         tmpElement = nullptr;
-        return;
+        return true;
     }
     ListElement *tmpElement2    = tmpElement->nextElement;
     delete tmpElement;

@@ -34,3 +34,4 @@ public:
     void print() const;
     ListElement& operator = ( ListElement const listElement );
 };
+
