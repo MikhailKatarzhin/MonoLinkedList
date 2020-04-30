@@ -33,7 +33,6 @@
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Unit filename="main.cpp" />
-		<Unit filename="mll.cpp" />
 		<Unit filename="mll.h" />
 		<Extensions>
 			<code_completion />
