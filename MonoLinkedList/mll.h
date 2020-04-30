@@ -1,5 +1,5 @@
 #pragma once
-
+#include <iostream>
 
 template <typename B> class MonoLinkedList
 {
@@ -29,4 +29,7 @@ public:
     const bool isContains( B const &b ) const;
     const bool isEmpty() const;
     const unsigned int size() const;
+
+    void print() const;
+    ListElement& operator = ( ListElement const &listElement );
 };

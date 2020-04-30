@@ -246,3 +246,21 @@ const unsigned int MonoLinkedList<B>::size() const
     }
     return c;
 }
+
+template <typename B>
+void MonoLinkedList<B>::print() const
+{
+    ListElement *tmpElement = top;
+    while( nullptr != tmpElement )
+    {
+        std::cout << tmpElement->unit;
+        tmpElement = tmpElement->nextElement;
+    }
+}
+
+template <typename B>
+typename MonoLinkedList<B>::ListElement& MonoLinkedList<B>::operator = ( ListElement const &listElement )
+{
+    this->unit = listElement->unit;
+    return *this;
+}
