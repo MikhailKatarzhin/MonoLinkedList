@@ -6,7 +6,7 @@ MonoLinkedList<B>::MonoLinkedList()
     top = nullptr;
 }
 template <typename B>
-MonoLinkedList<B>::MonoLinkedList( B const &b )
+MonoLinkedList<B>::MonoLinkedList( B const b )
 {
     top->unit = b;
 }
@@ -46,7 +46,7 @@ MonoLinkedList<B>::~MonoLinkedList()
 }
 
 template <typename B>
-void MonoLinkedList<B>::insertLast( B const &b )
+void MonoLinkedList<B>::insertLast( B const b )
 {
     if( nullptr == top )
     {
@@ -64,7 +64,7 @@ void MonoLinkedList<B>::insertLast( B const &b )
 }
 
 template <typename B>
-void MonoLinkedList<B>::insertFirst( B const &b )
+void MonoLinkedList<B>::insertFirst( B const b )
 {
     ListElement *tmpElement = new ListElement();
     tmpElement->unit        = b.unit;
@@ -79,7 +79,7 @@ void MonoLinkedList<B>::insertFirst( B const &b )
 }
 
 template <typename B>
-const bool MonoLinkedList<B>::insertAtPos( B const &b, int const pos )
+const bool MonoLinkedList<B>::insertAtPos( B const b, int const pos )
 {
     if( 1 > pos )
         return false;
@@ -112,7 +112,7 @@ const bool MonoLinkedList<B>::insertAtPos( B const &b, int const pos )
 }
 
 template <typename B>
-void MonoLinkedList<B>::deleteAtPtr( ListElement &ptrElement )
+void MonoLinkedList<B>::deleteAtPtr( ListElement ptrElement )
 {
     if( nullptr == ptrElement )
         return;
@@ -219,7 +219,7 @@ const typename MonoLinkedList<B>::ListElement& MonoLinkedList<B>::getFirst() con
 }
 
 template <typename B>
-const bool MonoLinkedList<B>::isContains( B const &b ) const
+const bool MonoLinkedList<B>::isContains( B const b ) const
 {
     if( nullptr == top )
         return false;
@@ -255,16 +255,18 @@ const unsigned int MonoLinkedList<B>::size() const
 template <typename B>
 void MonoLinkedList<B>::print() const
 {
+    if( top->isEmpty() )
+        std::cout << "There aren't elements!";
     ListElement *tmpElement = top;
     while( nullptr != tmpElement )
     {
-        std::cout << tmpElement->unit;
+        std::cout << tmpElement->unit << std::endl;
         tmpElement = tmpElement->nextElement;
     }
 }
 
 template <typename B>
-typename MonoLinkedList<B>::ListElement& MonoLinkedList<B>::operator = ( ListElement const &listElement )
+typename MonoLinkedList<B>::ListElement& MonoLinkedList<B>::operator = ( ListElement const listElement )
 {
     this->unit = listElement->unit;
     return *this;
