@@ -29,6 +29,18 @@ MonoLinkedList<B>::MonoLinkedList( MonoLinkedList const &monoLinkedList )
 }
 
 template <typename B>
+MonoLinkedList<B>::~MonoLinkedList()
+{
+    while( nullptr != top )
+    {
+        ListElement *tmpElement = top;
+        top                     = top->nextElement;
+        delete tmpElement;
+        tmpElement              = nullptr;
+    }
+}
+
+template <typename B>
 void MonoLinkedList<B>::insertLast( B const &b )
 {
     if( nullptr == top )
@@ -136,9 +148,8 @@ void MonoLinkedList<B>::deleteFirst()
         top = nullptr;
         return;
     }
-    ListElement *tmpElement = top->nextElement;
-    top->unit               = top->nextElement->unit;
-    top->nextElement        = top->nextElement->nextElement;
+    ListElement *tmpElement = top;
+    top = top->nextElement;
     delete tmpElement;
     tmpElement = nullptr;
 }
@@ -174,4 +185,64 @@ const bool MonoLinkedList<B>::deleteAtPos( int const pos )
     delete tmpElement;
     tmpElement->nextElement     = tmpElement2;
     return true;
+}
+
+template <typename B>
+void MonoLinkedList<B>::clear()
+{
+    while( nullptr != top )
+    {
+        ListElement *tmpElement = top;
+        top                     = top->nextElement;
+        delete tmpElement;
+        tmpElement              = nullptr;
+    }
+}
+
+template <typename B>
+const typename MonoLinkedList<B>::ListElement& MonoLinkedList<B>::getLast() const
+{
+        ListElement *tmpElement = top;
+        while( nullptr != tmpElement->nextElement )
+            tmpElement = tmpElement->nextElement;
+}
+
+template <typename B>
+const typename MonoLinkedList<B>::ListElement& MonoLinkedList<B>::getFirst() const
+{
+        return top;
+}
+
+template <typename B>
+const bool MonoLinkedList<B>::isContains( B const &b ) const
+{
+    if( nullptr == top )
+        return false;
+    ListElement *tmpElement = top;
+    while( nullptr != tmpElement->nextElement )
+    {
+        if( tmpElement->unit == b )
+            return true;
+        tmpElement = tmpElement->nextElement;
+    }
+    return ( tmpElement->unit == b );
+}
+
+template <typename B>
+const bool MonoLinkedList<B>::isEmpty() const
+{
+    return ( nullptr == top );
+}
+
+template <typename B>
+const unsigned int MonoLinkedList<B>::size() const
+{
+    unsigned int c = 0;
+    ListElement *tmpElement = top;
+    while( nullptr != tmpElement )
+    {
+        ++c;
+        tmpElement = tmpElement->nextElement;
+    }
+    return c;
 }

@@ -13,6 +13,7 @@ private:
 public:
     MonoLinkedList();
     MonoLinkedList( MonoLinkedList const &monoLinkedList );
+    ~MonoLinkedList();
 
     void insertLast( B const &b );
     void insertFirst( B const &b );
@@ -22,4 +23,10 @@ public:
     void deleteLast();
     void deleteFirst();
     const bool deleteAtPos( int const pos );
+    void clear();
+    const ListElement& getLast() const;
+    const ListElement& getFirst() const;
+    const bool isContains( B const &b ) const;
+    const bool isEmpty() const;
+    const unsigned int size() const;
 };
