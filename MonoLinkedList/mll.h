@@ -12,6 +12,7 @@ private:
     ListElement *top;
 public:
     MonoLinkedList();
+    MonoLinkedList( B const &b );
     MonoLinkedList( MonoLinkedList const &monoLinkedList );
     ~MonoLinkedList();
 

@@ -6,6 +6,11 @@ MonoLinkedList<B>::MonoLinkedList()
     top = nullptr;
 }
 template <typename B>
+MonoLinkedList<B>::MonoLinkedList( B const &b )
+{
+    top->unit = b;
+}
+template <typename B>
 MonoLinkedList<B>::MonoLinkedList( MonoLinkedList const &monoLinkedList )
 {
     if( nullptr == monoLinkedList->top )
