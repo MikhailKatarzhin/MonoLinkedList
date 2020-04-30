@@ -16,5 +16,10 @@ public:
 
     void insertLast( B const &b );
     void insertFirst( B const &b );
-    bool insertAtPos( B const &b, int const pos );
+    const bool insertAtPos( B const &b, int const pos );
+
+    void deleteAtPtr( ListElement &ptrElement );
+    void deleteLast();
+    void deleteFirst();
+    const bool deleteAtPos( int const pos );
 };

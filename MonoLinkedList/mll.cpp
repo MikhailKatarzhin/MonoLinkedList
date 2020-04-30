@@ -62,7 +62,7 @@ void MonoLinkedList<B>::insertFirst( B const &b )
 }
 
 template <typename B>
-bool MonoLinkedList<B>::insertAtPos( B const &b, int const pos )
+const bool MonoLinkedList<B>::insertAtPos( B const &b, int const pos )
 {
     if( 1 > pos )
         return false;
@@ -70,8 +70,13 @@ bool MonoLinkedList<B>::insertAtPos( B const &b, int const pos )
     {
         return false;
     }
+    if( ( 1 == pos ) )
+    {
+        insertFirst( b );
+        return;
+    }
     ListElement *tmpElement = top;
-    for( int i = pos ; i > 1 ; --i )
+    for( int i = pos ; i > 2 ; --i )
     {
         if( nullptr == tmpElement->nextElement )
             return false;
@@ -79,7 +84,94 @@ bool MonoLinkedList<B>::insertAtPos( B const &b, int const pos )
     }
     ListElement *tmpElement2    = new ListElement();
     tmpElement2->unit           = b;
+    if( nullptr == tmpElement->nextElement )
+    {
+        tmpElement->nextElement = tmpElement2;
+        return;
+    }
     tmpElement2->nextElement    = tmpElement->nextElement;
+    tmpElement->nextElement     = tmpElement2;
+    return true;
+}
+
+template <typename B>
+void MonoLinkedList<B>::deleteAtPtr( ListElement &ptrElement )
+{
+    if( nullptr == ptrElement )
+        return;
+    if( nullptr == ptrElement->nextElement )
+        ptrElement = nullptr;
+        return;
+
+    ptrElement->unit = ptrElement->nextElement->unit;
+    ListElement *tmpElement = ptrElement->nextElement->nextElement;
+    delete ptrElement->nextElement;
+    ptrElement->nextElement = tmpElement;
+}
+
+template <typename B>
+void MonoLinkedList<B>::deleteLast()
+{
+    if( nullptr == top )
+    {
+        return;
+    }
+    ListElement *tmpElement = top;
+    while( tmpElement->nextElement->nextElement != nullptr )
+        tmpElement = tmpElement->nextElement;
+    delete tmpElement->nextElement;
+    tmpElement->nextElement = nullptr;
+}
+
+template <typename B>
+void MonoLinkedList<B>::deleteFirst()
+{
+    if( nullptr == top )
+    {
+        return;
+    }
+    if( nullptr == top->nextElement )
+    {
+        delete top;
+        top = nullptr;
+        return;
+    }
+    ListElement *tmpElement = top->nextElement;
+    top->unit               = top->nextElement->unit;
+    top->nextElement        = top->nextElement->nextElement;
+    delete tmpElement;
+    tmpElement = nullptr;
+}
+
+template <typename B>
+const bool MonoLinkedList<B>::deleteAtPos( int const pos )
+{
+    if( 1 > pos )
+        return false;
+    if( nullptr == top )
+    {
+        return false;
+    }
+    if( ( 1 == pos ) )
+    {
+        deleteFirst();
+        return;
+    }
+    ListElement *tmpElement = top;
+    for( int i = pos ; i > 2 ; --i )
+    {
+        if( nullptr == tmpElement->nextElement )
+            return false;
+        tmpElement = tmpElement->nextElement;
+    }
+    if( nullptr == tmpElement->nextElement )
+    {
+        delete tmpElement;
+        tmpElement = nullptr;
+        return;
+    }
+    ListElement *tmpElement2    = tmpElement->nextElement;
+    delete tmpElement;
     tmpElement->nextElement     = tmpElement2;
     return true;
 }
