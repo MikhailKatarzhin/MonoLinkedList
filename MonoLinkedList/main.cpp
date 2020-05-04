@@ -3,7 +3,7 @@
 
 int main()
 {
-    MonoLinkedList<int> list1;
+    /*MonoLinkedList<int> list1;
     list1.insertFirst( 5 );
     list1.insertFirst( 10 );
     list1.insertFirst( 3 );
@@ -21,5 +21,20 @@ int main()
     if( list1.deleteAtPos( 4 ) )
     std::cout << std::endl << std::endl << std::endl;
     list1.print();
+    */
+    MonoLinkedList<int> list1;
+list1.insertFirst( 5 );
+list1.insertFirst( 10 );
+//list1.insertFirst( 3 );
+/*list1.insertFirst( 1231 );
+list1.insertFirst( 5 );*/
+list1.print();
+
+if(list1.deleteAtPos( 2 ))
+std::cout << "true" << std::endl;
+else
+std::cout << "false" << std::endl;
+
+list1.print();
     return 0;
 }

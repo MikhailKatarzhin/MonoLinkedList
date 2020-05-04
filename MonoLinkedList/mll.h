@@ -74,6 +74,7 @@ public:
         tmpElement->unit        = b;
         if( nullptr == top )
         {
+            tmpElement->nextElement = nullptr;
             top = tmpElement;
             return;
         }
@@ -172,12 +173,12 @@ public:
         ListElement *tmpElement = top;
         for( int i = pos ; i > 2 ; --i )
         {
-            if( nullptr == tmpElement )
+            if( ( nullptr == tmpElement->nextElement )||( nullptr == tmpElement ) )
                 return false;
             tmpElement = tmpElement->nextElement;
         }
-        if( nullptr == tmpElement->nextElement )
-            return true;
+        if( ( nullptr == tmpElement->nextElement )||( nullptr == tmpElement ) )
+            return false;
         ListElement *tmptmpElement = tmpElement->nextElement;
         tmpElement->nextElement = tmpElement->nextElement->nextElement;
         delete tmptmpElement;
