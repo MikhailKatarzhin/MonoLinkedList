@@ -170,21 +170,17 @@ public:
             return true;
         }
         ListElement *tmpElement = top;
-        for( int i = pos ; i > 1 ; --i )
+        for( int i = pos ; i > 2 ; --i )
         {
             if( nullptr == tmpElement )
                 return false;
             tmpElement = tmpElement->nextElement;
         }
         if( nullptr == tmpElement->nextElement )
-        {
-            delete tmpElement;
-            tmpElement = nullptr;
             return true;
-        }
-        tmpElement->unit = tmpElement->nextElement->unit;
+        ListElement *tmptmpElement = tmpElement->nextElement;
         tmpElement->nextElement = tmpElement->nextElement->nextElement;
-        delete tmpElement->nextElement;
+        delete tmptmpElement;
         return true;
     }
 

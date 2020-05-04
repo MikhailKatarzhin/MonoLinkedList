@@ -16,7 +16,9 @@ int main()
     std::cout << "\nCount elements: " << list1.size();
     std::cout << "\nLast: " << list1.getLast();
     list1.deleteFirst();
-    if( list1.deleteAtPos( 2 ) )
+    std::cout << std::endl << std::endl << std::endl;
+    list1.print();
+    if( list1.deleteAtPos( 4 ) )
     std::cout << std::endl << std::endl << std::endl;
     list1.print();
     return 0;
